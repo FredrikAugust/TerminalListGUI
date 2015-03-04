@@ -53,6 +53,30 @@ namespace TerminalListGUI
             return OptionList;
         }
     }
+    class OptionPrinter
+    {
+        public static void printOptions(int selected = 0)
+        {
+            List<Option> Options = OptionCreator.CreateOptions();
+
+            for (int i = 0; i < Options.Count; i++)
+            {
+                Console.Clear();
+
+                string _name = Options[i].Name;
+                string _desc = Options[i].Desc;
+
+                if (i == selected)
+                {
+                    Console.BackgroundColor = ConsoleColor.White;
+                    Console.ForegroundColor = ConsoleColor.Black;
+
+                    Console.WriteLine("Name: {0}".PadRight(Console.WindowWidth - (1 + _name.Length)), _name);
+                    Console.WriteLine("Desc: {0}".PadRight(Console.WindowWidth - (1 + _desc.Length)), _desc);
+                }
+            }
+        }
+    }
     class Program
     {
         static void Main()
