@@ -8,7 +8,10 @@ namespace TerminalListGUI
     {
         static void Main()
         {
+            Option option1 = new Option("test", "test123");
 
+            Console.WriteLine(option1.name);
+            Console.ReadKey();
         }
     }
 }
