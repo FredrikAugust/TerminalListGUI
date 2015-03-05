@@ -7,7 +7,7 @@
     <ProjectGuid>{B3148321-787F-46AE-9DC5-4798C6CFC3A2}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Terminal_List_GUI</RootNamespace>
+    <RootNamespace>OptionFunctionManipulator</RootNamespace>
     <AssemblyName>Terminal List GUI</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="OptionMethods.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

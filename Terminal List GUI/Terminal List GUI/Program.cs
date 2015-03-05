@@ -1,18 +1,27 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using OptionFunctionManipulator;
 
 namespace TerminalListGUI
 {
-    interface IOption
+    class Option
     {
-        string Name { get; set; }
-        string Desc { get; set; }
-    }
-    class Option : IOption
-    {
+        private int optionID;
         private string name;
         private string desc;
+
+        public int OptionID
+        {
+            get
+            {
+                return this.optionID;
+            }
+            set
+            {
+                this.optionID = value;
+            }
+        }
 
         public string Name
         {
@@ -44,10 +53,26 @@ namespace TerminalListGUI
         {
             _optionsList.Add(_optionToAdd);
         }
-        public static void CreateOption(Option _option, List<Option> _list,  string _name, string _desc)
+        public static void CreateOption(Option _option, List<Option> _list,  string _name, string _desc, int _id = 1)
         {
             _option.Name = _name;
             _option.Desc = _desc;
+            
+            int max_id = 1;
+
+            for (var i = 0; i < _list.Count; i++)
+            {
+                max_id = _list[i].OptionID;
+            }
+
+            if (max_id != 1)
+            {
+                _option.OptionID = max_id;
+            }
+            else
+            {
+                _option.OptionID = 1;
+            }
 
             AddToList(_option, _list);
         }
@@ -65,13 +90,15 @@ namespace TerminalListGUI
                 MenuUI.CreateMenu(_position + 1);
             }
         }
+        private static void CallFunction(int _pos, List<Option> _options)
+        {
+            List<OptionFunction> OptionFunctions = CreateOptionFunction.CreateFunctions();
+        }
         public static void ReadKey(List<Option> options, int position)
         {
-            bool validInput = false;
-
             Console.WriteLine("Use the arrow keys to navigate, and enter to select option");
 
-            while (validInput != true)
+            while (true)
             {
                 ConsoleKeyInfo keyPressed = Console.ReadKey(true);
 
@@ -83,10 +110,7 @@ namespace TerminalListGUI
                     case "DownArrow":
                         ChangeOption(position, "down", options);
                         continue;
-                    case "Enter":  // This is going to be remade as the options actually gets methods
-                        Console.WriteLine("This feature has not yet been implemented.\nPress any button to close the program..");
-                        Console.ReadKey(true);
-                        Environment.Exit(0);
+                    case "Enter":
                         break;
                     default:
                         Console.WriteLine("Invalid input, try again.");
@@ -107,11 +131,16 @@ namespace TerminalListGUI
         {
             List<Option> Options = new List<Option>();
 
-            Option NewFile = new Option();
-            Option RemoveFile = new Option();
+            Option Placeholder1 = new Option();
+            Option Placeholder2 = new Option();
+            Option Placeholder3 = new Option();
+            Option Placeholder4 = new Option();
 
-            OptionCreator.CreateOption(NewFile, Options, "New File", "Creates a new file");
-            OptionCreator.CreateOption(RemoveFile, Options, "Delete File", "Deletes a file");
+            // Placeholders
+            OptionCreator.CreateOption(Placeholder1, Options, "Hold my place", "Place my hold");
+            OptionCreator.CreateOption(Placeholder2, Options, "Hold my place", "Place my hold");
+            OptionCreator.CreateOption(Placeholder3, Options, "Hold my place", "Place my hold");
+            OptionCreator.CreateOption(Placeholder4, Options, "Hold my place", "Place my hold");
 
             Console.Clear();
 
