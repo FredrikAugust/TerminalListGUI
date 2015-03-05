@@ -143,13 +143,8 @@ namespace TerminalListGUI
         {
             List<Option> Options = new List<Option>();
 
-            Option Placeholder1 = new Option();
-            Option Placeholder2 = new Option();
-            Option Placeholder3 = new Option();
             Option Exit = new Option();
-
             OptionCreator.CreateOption(Exit, Options, "Exit", "Terminates the program");
-
             Console.Clear();
 
             for (int i = 0; i < Options.Count; i++)
