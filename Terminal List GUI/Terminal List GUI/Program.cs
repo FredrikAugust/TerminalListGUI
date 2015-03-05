@@ -148,11 +148,7 @@ namespace TerminalListGUI
             Option Placeholder3 = new Option();
             Option Exit = new Option();
 
-            // Placeholders
-            OptionCreator.CreateOption(Placeholder1, Options, "Hold my place", "Place my hold");
-            OptionCreator.CreateOption(Placeholder2, Options, "Hold my place", "Place my hold");
-            OptionCreator.CreateOption(Placeholder3, Options, "Hold my place", "Place my hold");
-            OptionCreator.CreateOption(Exit, Options, "Exit", "Closes the program");
+            OptionCreator.CreateOption(Exit, Options, "Exit", "Terminates the program");
 
             Console.Clear();
 
