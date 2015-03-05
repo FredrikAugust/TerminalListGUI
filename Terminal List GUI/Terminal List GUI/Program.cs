@@ -99,6 +99,7 @@ namespace TerminalListGUI
                 if (OptionFunctions[i].FunctionID == _pos)
                 {
                     OptionFunctions[i].Function();
+                    ReturnToMenu.FunctionControls();
                 }
             }
         }

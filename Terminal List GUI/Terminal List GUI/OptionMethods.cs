@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TerminalListGUI;
 
 namespace OptionFunctionManipulator
 {
@@ -35,6 +36,33 @@ namespace OptionFunctionManipulator
             return OptionFunctions;
         }
     }
+    class ReturnToMenu
+    {
+        public static void FunctionControls() 
+        {
+            string exitInfo = "Press any key to return to the option menu, or Escape to exit the program";
+            Console.WriteLine("\n");
+
+            Console.BackgroundColor = ConsoleColor.White;
+            Console.ForegroundColor = ConsoleColor.Black;
+
+            Console.WriteLine("{0}".PadRight(Console.WindowWidth - (1 + exitInfo.Length)), exitInfo);
+
+            Console.ResetColor();
+
+            ConsoleKeyInfo keyPressed = Console.ReadKey(true);
+
+            switch (Convert.ToString(keyPressed.Key))
+            {
+                case "Escape":
+                    Environment.Exit(0);
+                    break;
+                default:
+                    MenuUI.CreateMenu();
+                    break;
+            }   
+        }
+    }
 
     class Placeholder1 : IFunction
     {
@@ -56,8 +84,6 @@ namespace OptionFunctionManipulator
         {
             Console.Clear();
             Console.WriteLine("Sweeet");
-            Console.ReadKey();
-            Environment.Exit(0);
         }
     }
     class Placeholder2 : IFunction
@@ -80,8 +106,6 @@ namespace OptionFunctionManipulator
         {
             Console.Clear();
             Console.WriteLine("Cool");
-            Console.ReadKey();
-            Environment.Exit(0);
         }
     }
     class Placeholder3 : IFunction
@@ -104,8 +128,6 @@ namespace OptionFunctionManipulator
         {
             Console.Clear();
             Console.WriteLine("Nice");
-            Console.ReadKey();
-            Environment.Exit(0);
         }
     }
     class Exit : IFunction
