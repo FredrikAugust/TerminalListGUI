@@ -92,11 +92,21 @@ namespace TerminalListGUI
         }
         private static void CallFunction(int _pos, List<Option> _options)
         {
-            List<OptionFunction> OptionFunctions = CreateOptionFunction.CreateFunctions();
+            List<IFunction> OptionFunctions = CreateOptionFunction.CreateFunctions();
+
+            for (int i = 0; i < OptionFunctions.Count; i++)
+            {
+                if (OptionFunctions[i].FunctionID == _pos)
+                {
+                    OptionFunctions[i].Function();
+                }
+            }
         }
         public static void ReadKey(List<Option> options, int position)
         {
             Console.WriteLine("Use the arrow keys to navigate, and enter to select option");
+
+            Console.CursorVisible = false;
 
             while (true)
             {
@@ -111,6 +121,7 @@ namespace TerminalListGUI
                         ChangeOption(position, "down", options);
                         continue;
                     case "Enter":
+                        CallFunction(position, options);
                         break;
                     default:
                         Console.WriteLine("Invalid input, try again.");
@@ -134,13 +145,13 @@ namespace TerminalListGUI
             Option Placeholder1 = new Option();
             Option Placeholder2 = new Option();
             Option Placeholder3 = new Option();
-            Option Placeholder4 = new Option();
+            Option Exit = new Option();
 
             // Placeholders
             OptionCreator.CreateOption(Placeholder1, Options, "Hold my place", "Place my hold");
             OptionCreator.CreateOption(Placeholder2, Options, "Hold my place", "Place my hold");
             OptionCreator.CreateOption(Placeholder3, Options, "Hold my place", "Place my hold");
-            OptionCreator.CreateOption(Placeholder4, Options, "Hold my place", "Place my hold");
+            OptionCreator.CreateOption(Exit, Options, "Exit", "Closes the program");
 
             Console.Clear();
 
