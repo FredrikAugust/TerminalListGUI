@@ -61,8 +61,6 @@ namespace TerminalListGUI
 
             for (int i = 0; i < Options.Count; i++)
             {
-                Console.Clear();
-
                 string _name = Options[i].Name;
                 string _desc = Options[i].Desc;
 
@@ -73,7 +71,12 @@ namespace TerminalListGUI
 
                     Console.WriteLine("Name: {0}".PadRight(Console.WindowWidth - (1 + _name.Length)), _name);
                     Console.WriteLine("Desc: {0}".PadRight(Console.WindowWidth - (1 + _desc.Length)), _desc);
+                    
+                    Console.ResetColor();
                 }
+                
+                Console.WriteLine("Name: {0}".PadRight(Console.WindowWidth - (1 + _name.Length)), _name);
+                Console.WriteLine("Desc: {0}".PadRight(Console.WindowWidth - (1 + _desc.Length)), _desc);
             }
         }
     }
@@ -81,6 +84,7 @@ namespace TerminalListGUI
     {
         static void Main()
         {
+            OptionPrinter.PrintOptions();
             Console.ReadKey();  // Stops the program from exiting when it reaches the last line
         }
     }
