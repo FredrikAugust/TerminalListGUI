@@ -40,51 +40,96 @@ namespace TerminalListGUI
     }
     class OptionCreator
     {
-        public static List<Option> CreateOptions()
+        private static void AddToList(Option _optionToAdd, List<Option> _optionsList)
         {
-            List<Option> OptionList = new List<Option>();
+            _optionsList.Add(_optionToAdd);
+        }
+        public static void CreateOption(Option _option, List<Option> _list,  string _name, string _desc)
+        {
+            _option.Name = _name;
+            _option.Desc = _desc;
 
-            Option HelloWorld = new Option();
-            HelloWorld.Name = "Print \"Hello World\"";
-            HelloWorld.Desc = "Prints \"Hello World\"";
-
-            OptionList.Add(HelloWorld);
-
-            return OptionList;
+            AddToList(_option, _list);
         }
     }
-    class OptionPrinter
+    class MenuHandler
     {
-        public static void printOptions(int selected = 0)
+        public static void ReadKey(int position = 0)
         {
-            List<Option> Options = OptionCreator.CreateOptions();
+            bool validInput = false;
+
+            Console.WriteLine("Use the arrow keys to navigate, and enter to select option");
+
+            while (validInput != true)
+            {
+                ConsoleKeyInfo keyPressed = Console.ReadKey(true);
+
+                switch (Convert.ToString(keyPressed.Key))
+                {
+                    case "UpArrow":
+                        MenuUI.CreateMenu(position - 1);
+                        break;
+                    case "DownArrow":
+                        MenuUI.CreateMenu(position + 1);
+                        break;
+                    case "Enter":
+                        Console.WriteLine("This feature has not yet been implemented.");
+                        break;
+                    default:
+                        Console.WriteLine("Invalid input, try again.");
+                        continue;
+                }
+            }
+        }
+    }
+    class MenuUI
+    {
+        private static void PrintMenuOptions(Option option)
+        {
+            Console.WriteLine("Name: {0}".PadRight(Console.WindowWidth - (1 + option.Name.Length)), option.Name);
+            Console.WriteLine("Desc: {0}".PadRight(Console.WindowWidth - (1 + option.Desc.Length)), option.Desc);
+            Console.WriteLine();
+        }
+        public static void CreateMenu(int selected = 0)
+        {
+            List<Option> Options = new List<Option>();
+
+            Option NewFile = new Option();
+            Option RemoveFile = new Option();
+
+            OptionCreator.CreateOption(NewFile, Options, "New File", "Creates a new file");
+            OptionCreator.CreateOption(RemoveFile, Options, "Delete File", "Deletes a file");
+
+            Console.Clear();
 
             for (int i = 0; i < Options.Count; i++)
             {
-                string _name = Options[i].Name;
-                string _desc = Options[i].Desc;
-
                 if (i == selected)
                 {
                     Console.BackgroundColor = ConsoleColor.White;
                     Console.ForegroundColor = ConsoleColor.Black;
 
-                    Console.WriteLine("Name: {0}".PadRight(Console.WindowWidth - (1 + _name.Length)), _name);
-                    Console.WriteLine("Desc: {0}".PadRight(Console.WindowWidth - (1 + _desc.Length)), _desc);
+                    PrintMenuOptions(Options[i]);
                     
                     Console.ResetColor();
+
+                    continue;
                 }
-                
-                Console.WriteLine("Name: {0}".PadRight(Console.WindowWidth - (1 + _name.Length)), _name);
-                Console.WriteLine("Desc: {0}".PadRight(Console.WindowWidth - (1 + _desc.Length)), _desc);
+
+                PrintMenuOptions(Options[i]);
             }
+
+            MenuHandler.ReadKey(selected);
         }
     }
     class Program
     {
         static void Main()
         {
-            OptionPrinter.PrintOptions();
+            Console.Clear();
+
+            MenuUI.CreateMenu();
+
             Console.ReadKey();  // Stops the program from exiting when it reaches the last line
         }
     }
