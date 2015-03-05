@@ -54,7 +54,18 @@ namespace TerminalListGUI
     }
     class MenuHandler
     {
-        public static void ReadKey(int position = 0)
+        private static void ChangeOption(int _position, string _direction, List<Option> _options)
+        {
+            if (_direction == "up" && _position != 0)
+            {
+                MenuUI.CreateMenu(_position - 1);
+            }
+            else if (_direction == "down" && _position != (_options.Count - 1)) 
+            {
+                MenuUI.CreateMenu(_position + 1);
+            }
+        }
+        public static void ReadKey(List<Option> options, int position)
         {
             bool validInput = false;
 
@@ -67,13 +78,15 @@ namespace TerminalListGUI
                 switch (Convert.ToString(keyPressed.Key))
                 {
                     case "UpArrow":
-                        MenuUI.CreateMenu(position - 1);
-                        break;
+                        ChangeOption(position, "up", options);
+                        continue;
                     case "DownArrow":
-                        MenuUI.CreateMenu(position + 1);
-                        break;
-                    case "Enter":
-                        Console.WriteLine("This feature has not yet been implemented.");
+                        ChangeOption(position, "down", options);
+                        continue;
+                    case "Enter":  // This is going to be remade as the options actually gets methods
+                        Console.WriteLine("This feature has not yet been implemented.\nPress any button to close the program..");
+                        Console.ReadKey(true);
+                        Environment.Exit(0);
                         break;
                     default:
                         Console.WriteLine("Invalid input, try again.");
@@ -119,17 +132,14 @@ namespace TerminalListGUI
                 PrintMenuOptions(Options[i]);
             }
 
-            MenuHandler.ReadKey(selected);
+            MenuHandler.ReadKey(Options, selected);
         }
     }
     class Program
     {
         static void Main()
         {
-            Console.Clear();
-
             MenuUI.CreateMenu();
-
             Console.ReadKey();  // Stops the program from exiting when it reaches the last line
         }
     }
