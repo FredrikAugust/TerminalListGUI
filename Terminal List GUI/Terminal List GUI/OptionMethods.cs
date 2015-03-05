@@ -56,6 +56,8 @@ namespace OptionFunctionManipulator
         {
             Console.Clear();
             Console.WriteLine("Sweeet");
+            Console.ReadKey();
+            Environment.Exit(0);
         }
     }
     class Placeholder2 : IFunction
@@ -78,6 +80,8 @@ namespace OptionFunctionManipulator
         {
             Console.Clear();
             Console.WriteLine("Cool");
+            Console.ReadKey();
+            Environment.Exit(0);
         }
     }
     class Placeholder3 : IFunction
@@ -100,6 +104,8 @@ namespace OptionFunctionManipulator
         {
             Console.Clear();
             Console.WriteLine("Nice");
+            Console.ReadKey();
+            Environment.Exit(0);
         }
     }
     class Exit : IFunction
