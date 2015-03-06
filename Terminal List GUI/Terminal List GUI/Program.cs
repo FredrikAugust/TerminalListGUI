@@ -171,8 +171,7 @@ namespace TerminalListGUI
     {
         static void Main()
         {
-            MenuUI.CreateMenu();
-            Console.ReadKey();  // Stops the program from exiting when it reaches the last line
+            MenuUI.CreateMenu();  // MAKE MAGIC HAPPEN
         }
     }
 }
